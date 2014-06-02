@@ -1,0 +1,6 @@
+﻿FolderD\FolderD1\Bin1 Bin1
+FolderD\FolderD1\Bin2 Bin2
+FolderD\FolderD1\Bin3 Bin3
+FolderD\FolderD1\FolderD2\FolderD3\FolderD4\Bin1 Bin1
+FolderD\FolderD1\FolderD2\FolderD3\FolderD4\Bin2 Bin2
+FolderD\FolderD1\FolderD2\FolderD3\FolderD4\Bin3 Bin3

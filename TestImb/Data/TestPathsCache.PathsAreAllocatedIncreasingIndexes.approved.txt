@@ -1,0 +1,7 @@
+﻿System.Int32[] = 1 [Z]
+System.Int32[] = 2 [Z,Y]
+System.Int32[] = 3 [Z,Y,X]
+System.Int32[] = 4 [Z,Y,X,W]
+System.Int32[] = 5 [Z,Y,X,W,V]
+System.Int32[] = 6 [Z,Y,X,W,V,U]
+System.Int32[] = 7 [Z,Y,X,W,V,U,T]

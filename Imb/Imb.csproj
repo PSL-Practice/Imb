@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CF71AC3F-E3B3-411F-9948-29FD4040911F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Imb</RootNamespace>
+    <AssemblyName>Imb</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ImportedLibs\Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Gat.Controls.OpenDialog">
+      <HintPath>..\packages\OpenDialog.1.1.1\lib\net45\Gat.Controls.OpenDialog.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\packages\Windows7APICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\packages\Windows7APICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TreeViewEx">
+      <HintPath>..\packages\treeviewex.0.1.0.1\lib\net40\TreeViewEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Behaviours\BindableSelectedItemBehavior.cs" />
+    <Compile Include="Behaviours\KeyCommand.cs" />
+    <Compile Include="Behaviours\VisibleWhen.cs" />
+    <Compile Include="Caching\LoadedBinaryCache.cs" />
+    <Compile Include="Data\BinariesCache.cs" />
+    <Compile Include="Data\BinaryDataCache.cs" />
+    <Compile Include="Data\BinaryDataStorageClass.cs" />
+    <Compile Include="Data\BinaryStorageClass.cs" />
+    <Compile Include="Data\IBinariesCache.cs" />
+    <Compile Include="Data\IBinaryDataCache.cs" />
+    <Compile Include="Data\ILibrary.cs" />
+    <Compile Include="Data\ILibraryOperations.cs" />
+    <Compile Include="Data\IPathsCache.cs" />
+    <Compile Include="Data\Library.cs" />
+    <Compile Include="Data\NotFoundInLibraryException.cs" />
+    <Compile Include="Data\OnError.cs" />
+    <Compile Include="Data\PathsCache.cs" />
+    <Compile Include="Data\PathStorageClass.cs" />
+    <Compile Include="Data\RootAlreadyExistsException.cs" />
+    <Compile Include="Data\TagsCache.cs" />
+    <Compile Include="Data\TagStorageClass.cs" />
+    <Compile Include="Data\View\ILibraryView.cs" />
+    <Compile Include="Data\View\LibraryFileNode.cs" />
+    <Compile Include="Data\View\LibraryFolderNode.cs" />
+    <Compile Include="Data\View\LibraryView.cs" />
+    <Compile Include="Data\View\LibraryViewNode.cs" />
+    <Compile Include="Data\View\LibraryContentOperations.cs" />
+    <Compile Include="DropHandling\Behaviors\FrameworkElementAdorner.cs" />
+    <Compile Include="DropHandling\Behaviors\FrameworkElementDragBehavior.cs" />
+    <Compile Include="DropHandling\Behaviors\FrameworkElementDropBehavior.cs" />
+    <Compile Include="DropHandling\Behaviors\IDragable.cs" />
+    <Compile Include="DropHandling\Behaviors\IDropable.cs" />
+    <Compile Include="DropHandling\Behaviors\ListBoxAdorner.cs" />
+    <Compile Include="DropHandling\Behaviors\ListBoxAdornerManager.cs" />
+    <Compile Include="DropHandling\Behaviors\ListBoxDropBehavior.cs" />
+    <Compile Include="DropHandling\Behaviors\UIHelper.cs" />
+    <Compile Include="DropHandling\DataHandlers\FileDropDataHandler.cs" />
+    <Compile Include="ErrorHandling\IErrorHandler.cs" />
+    <Compile Include="EventAggregation\AggregatorTimeSignalGenerator.cs" />
+    <Compile Include="EventAggregation\BatchedMessage.cs" />
+    <Compile Include="EventAggregation\BatchingListenerContainer.cs" />
+    <Compile Include="EventAggregation\EventAggregator.cs" />
+    <Compile Include="EventAggregation\GenericListenerContainer.cs" />
+    <Compile Include="EventAggregation\IEventAggregator.cs" />
+    <Compile Include="EventAggregation\IListener.cs" />
+    <Compile Include="EventAggregation\InterfaceExtractor.cs" />
+    <Compile Include="EventAggregation\IPrivateEventAggregator.cs" />
+    <Compile Include="EventAggregation\ListenerContainer.cs" />
+    <Compile Include="EventAggregation\MessageBatcher.cs" />
+    <Compile Include="EventAggregation\TimeSignal.cs" />
+    <Compile Include="EventAggregation\TimeSignalGenerator.cs" />
+    <Compile Include="EventAggregation\TimeSignalGeneratorBase.cs" />
+    <Compile Include="EventAggregation\UnitTestEventAggregator.cs" />
+    <Compile Include="Events\AddNewFolder.cs" />
+    <Compile Include="Events\MoveRequest.cs" />
+    <Compile Include="Events\RemoveRequest.cs" />
+    <Compile Include="Events\RenameRequest.cs" />
+    <Compile Include="Events\NodeSelfSelect.cs" />
+    <Compile Include="ImbSettings.cs" />
+    <Compile Include="LibrarySelection\ILibrarySelector.cs" />
+    <Compile Include="LibrarySelection\LibrarySelector.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="UI\ButtonStack.xaml.cs">
+      <DependentUpon>ButtonStack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CategoryTree.xaml.cs">
+      <DependentUpon>CategoryTree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Display.xaml.cs">
+      <DependentUpon>Display.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ErrorDisplay.xaml.cs">
+      <DependentUpon>ErrorDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utils\DropArgs.cs" />
+    <Compile Include="Utils\DropHandler.cs" />
+    <Compile Include="Utils\FileValidator.cs" />
+    <Compile Include="Utils\PathAdjuster.cs" />
+    <Compile Include="ViewModels\DisplayVm.cs" />
+    <Compile Include="ViewModels\ErrorHandlerView.cs" />
+    <Compile Include="ViewModels\ILibraryLocationDialog.cs" />
+    <Compile Include="ViewModels\LibraryLocationDialog.cs" />
+    <Compile Include="ViewModels\MainVm.cs" />
+    <Compile Include="WindowPositionSettings.cs" />
+    <Page Include="UI\ButtonStack.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\CategoryTree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Display.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\ErrorDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{c4b22491-3aba-42e8-9948-b740b961be2b}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

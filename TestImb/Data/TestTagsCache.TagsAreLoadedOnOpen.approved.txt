@@ -1,0 +1,7 @@
+﻿alpha = 1
+beta = 2
+charlie = 3
+delta = 4
+echo = 5
+foxtrot = 6
+golf = 7

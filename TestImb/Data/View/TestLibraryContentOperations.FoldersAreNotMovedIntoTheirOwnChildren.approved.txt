@@ -1,0 +1,15 @@
+﻿View
+~~~~
+LibraryFolderNode {root}
+    LibraryFolderNode {New Folder}
+        LibraryFolderNode {child}
+            LibraryFileNode {test}
+            LibraryFileNode {test2}
+
+
+Library
+~~~~~~~
+Adding "test" Timestamp 01/01/0001 00:00:00, Size 100, Container Path "some\path", Library path "root\child"
+Adding "test2" Timestamp 01/01/0001 00:00:00, Size 100, Container Path "some\path", Library path "root\child"
+Moving "test" from "root\child" to "root\New Folder\child", as "test"
+Moving "test2" from "root\child" to "root\New Folder\child", as "test2"

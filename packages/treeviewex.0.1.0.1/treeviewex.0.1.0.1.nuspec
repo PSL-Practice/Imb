@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>treeviewex</id>
+    <version>0.1.0.1</version>
+    <title>treeviewex</title>
+    <authors>Goroll</authors>
+    <owners>Goroll</owners>
+    <licenseUrl>https://treeviewex.codeplex.com/license</licenseUrl>
+    <projectUrl>https://treeviewex.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A TreeView which supports, unlike the standard tree in WPF, multiple selection and is a little better stylable.</description>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>treeviewex treeview tree .net40</tags>
+  </metadata>
+</package>

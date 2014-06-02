@@ -1,0 +1,2 @@
+﻿LibraryFolderNode {*New}
+    LibraryFileNode {test}

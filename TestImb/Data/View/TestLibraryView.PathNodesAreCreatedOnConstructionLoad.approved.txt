@@ -1,0 +1,32 @@
+﻿LibraryFileNode {Bin1}
+LibraryFileNode {Bin2}
+LibraryFileNode {Bin3}
+LibraryFolderNode {FolderA}
+    LibraryFolderNode {FolderA1}
+        LibraryFileNode {Bin1}
+        LibraryFileNode {Bin2}
+        LibraryFileNode {Bin3}
+LibraryFolderNode {FolderB}
+    LibraryFolderNode {FolderB1}
+        LibraryFolderNode {FolderB2}
+            LibraryFileNode {Bin1}
+            LibraryFileNode {Bin2}
+            LibraryFileNode {Bin3}
+LibraryFolderNode {FolderC}
+    LibraryFolderNode {FolderC1}
+        LibraryFolderNode {FolderC2}
+            LibraryFolderNode {FolderC3}
+                LibraryFileNode {Bin1}
+                LibraryFileNode {Bin2}
+                LibraryFileNode {Bin3}
+LibraryFolderNode {FolderD}
+    LibraryFolderNode {FolderD1}
+        LibraryFileNode {Bin1}
+        LibraryFileNode {Bin2}
+        LibraryFileNode {Bin3}
+        LibraryFolderNode {FolderD2}
+            LibraryFolderNode {FolderD3}
+                LibraryFolderNode {FolderD4}
+                    LibraryFileNode {Bin1}
+                    LibraryFileNode {Bin2}
+                    LibraryFileNode {Bin3}

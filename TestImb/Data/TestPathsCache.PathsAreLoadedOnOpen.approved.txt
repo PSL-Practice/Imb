@@ -1,0 +1,7 @@
+﻿System.Int32[] = 1 [alpha]
+System.Int32[] = 2 [alpha,beta]
+System.Int32[] = 3 [alpha,beta,charlie]
+System.Int32[] = 4 [alpha,beta,charlie,delta]
+System.Int32[] = 5 [alpha,beta,charlie,delta,echo]
+System.Int32[] = 6 [alpha,beta,charlie,delta,echo,foxtrot]
+System.Int32[] = 7 [alpha,beta,charlie,delta,echo,foxtrot,golf]

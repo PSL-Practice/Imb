@@ -1,0 +1,4 @@
+﻿LibraryFolderNode {root}
+    LibraryFolderNode {child}
+        LibraryFolderNode {test}
+        LibraryFolderNode {test2}

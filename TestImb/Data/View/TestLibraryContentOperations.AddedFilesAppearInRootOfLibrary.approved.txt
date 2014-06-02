@@ -1,0 +1,3 @@
+﻿LibraryFolderNode {root}
+    LibraryFolderNode {child}
+        LibraryFileNode {test}
