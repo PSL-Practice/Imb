@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 using Imb.Annotations;
@@ -35,10 +36,14 @@ namespace Imb.Data
 
         public void Create()
         {
-            if (Directory.Exists(_root))
-                throw new RootAlreadyExistsException(_root);
+            if (Directory.Exists(_root) 
+                && Directory.EnumerateFileSystemEntries(_root).Any())
+            {
+                throw new RootNotEmptyException(_root);
+            }
 
-            Directory.CreateDirectory(_root);
+            if (!Directory.Exists(_root))
+                Directory.CreateDirectory(_root);
 
             try
             {

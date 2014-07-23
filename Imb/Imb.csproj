@@ -92,7 +92,7 @@
     <Compile Include="Data\OnError.cs" />
     <Compile Include="Data\PathsCache.cs" />
     <Compile Include="Data\PathStorageClass.cs" />
-    <Compile Include="Data\RootAlreadyExistsException.cs" />
+    <Compile Include="Data\RootNotEmptyException.cs" />
     <Compile Include="Data\TagsCache.cs" />
     <Compile Include="Data\TagStorageClass.cs" />
     <Compile Include="Data\View\ILibraryView.cs" />

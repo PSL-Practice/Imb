@@ -72,7 +72,7 @@ namespace TestImb.Data
         }
 
         [Test, ExpectedException(typeof(RootNotDirectoryException))]
-        public void OpenThrowsIfLibraryIsNotAFolderMissing()
+        public void OpenThrowsIfLibraryIsNotAFolder()
         {
             Directory.CreateDirectory(_path);
             var root = Path.Combine(_path, "X");
@@ -82,12 +82,22 @@ namespace TestImb.Data
                 lib.Open();
         }
 
-        [Test, ExpectedException(typeof (RootAlreadyExistsException))]
-        public void ExceptionThrownByCreateIfFolderAlreadyPresent()
+        [Test, ExpectedException(typeof (RootNotEmptyException))]
+        public void ExceptionThrownByCreateIfLibraryFolderNotEmpty()
         {
             Directory.CreateDirectory(_path);
+            File.WriteAllBytes(Path.Combine(_path, "x"), new byte[] {0, 1, 2});
             var lib = new Library(_path, _fileValidator);
             lib.Create();
+        }
+
+        [Test]
+        public void CreateWorksIfEmptyFolderAlreadyPresent()
+        {
+            Directory.CreateDirectory(_path);
+            using (var lib = new Library(_path, _fileValidator))
+                lib.Create();
+            Assert.That(Directory.EnumerateFiles(_path).Count(), Is.GreaterThan(0));
         }
     }
 }

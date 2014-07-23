@@ -2,9 +2,9 @@ using System;
 
 namespace Imb.Data
 {
-    public class RootAlreadyExistsException : Exception
+    public class RootNotEmptyException : Exception
     {
-        public RootAlreadyExistsException(string root) : base(string.Format("The root directory \"{0}\" already exists.", root))
+        public RootNotEmptyException(string root) : base(string.Format("The root directory \"{0}\" already exists.", root))
         {
         }
     }
