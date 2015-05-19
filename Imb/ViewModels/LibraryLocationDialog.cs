@@ -1,6 +1,10 @@
+using System;
 using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using Gat.Controls;
 using Imb.UI;
+using Shell32;
 
 namespace Imb.ViewModels
 {
@@ -8,6 +12,10 @@ namespace Imb.ViewModels
     {
         public string GetNewLibraryLocation(string libraryPath)
         {
+            var folderDialog = new FolderBrowserDialog();
+            folderDialog.RootFolder = Environment.SpecialFolder.MyComputer;
+            folderDialog.ShowDialog();
+
             // Initializing Open Dialog
             var openDialog = new OpenDialogView();
             var vm = (OpenDialogViewModel)openDialog.DataContext;
