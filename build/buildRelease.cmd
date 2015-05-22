@@ -7,7 +7,7 @@ msbuild ..\Imb.sln /t:Rebuild /p:Configuration=Release
 
 if NOT EXIST "Imb %imbversion%" md "Imb %imbversion%"
 
-%upackage% imb Imb %imbversion% ..\imb\bin\release "Imb %imbversion%\imb_%imbversion%.pkg"
+%upackage% imb Imb %imbversion% ..\imb\bin\release "Imb %imbversion%\imb_%imbversion%.pkg" -nosub
 
 for %%i in ("Imb %imbversion%\*") do git add "%%i" -f
 
