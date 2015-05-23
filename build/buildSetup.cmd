@@ -1,3 +1,3 @@
 set uinstallgen=..\..\updateservice\src\UInstallGen\bin\Debug\UInstallGen.exe
 
-%uinstallgen% imb.cfg -wix WixTools -debugpause
+%uinstallgen% imb.cfg -wix WixTools
