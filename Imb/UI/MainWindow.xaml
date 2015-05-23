@@ -4,7 +4,7 @@
         xmlns:imb="clr-namespace:Imb"
         xmlns:ui="clr-namespace:Imb.UI"
         Closing="Window_Closing"
-        Title="MainWindow" Height="1280" Width="1024">
+        Title="{Binding Title}" Height="1280" Width="1024">
     <Grid Background="Teal">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

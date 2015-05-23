@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Imb.Data;
 using Imb.EventAggregation;
+using Imb.Events;
 using Imb.LibrarySelection;
 using NUnit.Framework;
 using TestImb.Mocks;
@@ -14,7 +16,7 @@ using UnitTestSupport;
 namespace TestImb.LibrarySelection
 {
     [TestFixture]
-    public class TestLibrarySelector
+    public class TestLibrarySelector : IListener<LibraryOpened>
     {
         private AutoKillFolder _folder;
         private string _path;
@@ -24,6 +26,7 @@ namespace TestImb.LibrarySelection
         private MockFileValidator _fileValidator;
         private MockErrorHandler _errorHandler;
         private UnitTestEventAggregator _eventAggregator;
+        private string _libraryOpenedName;
 
         [SetUp]
         public void SetUp()
@@ -35,6 +38,8 @@ namespace TestImb.LibrarySelection
             _path = Path.Combine(_folder.Path, "test");
             _path2 = Path.Combine(_folder.Path, "test2");
             _eventAggregator = new UnitTestEventAggregator();
+            _libraryOpenedName = string.Empty;
+            _eventAggregator.AddListener(this);
 
             _selector = new LibrarySelector(_fileValidator, _errorHandler,  _dispatcher.Dispatcher, _eventAggregator);
         }
@@ -43,6 +48,11 @@ namespace TestImb.LibrarySelection
         public void TearDown()
         {
             if (_selector != null) _selector.Dispose();
+        }
+
+        public void Handle(LibraryOpened message)
+        {
+            _libraryOpenedName = message.Name;
         }
 
         [Test]
@@ -114,6 +124,30 @@ namespace TestImb.LibrarySelection
             var lib = _selector.CreateLibrary(_path);
             var lib2 = _selector.OpenLibrary(_path2);
             File.Delete(Path.Combine(_path, ".1"));
+        }
+
+        [Test]
+        public void NewLibrarySendsLibraryOpenedNotification()
+        {
+            //Act
+            _selector.CreateLibrary(_path2);
+
+            //Assert
+            Assert.That(_libraryOpenedName, Is.EqualTo(_path2));
+        }
+
+        [Test]
+        public void OpenLibrarySendsLibraryOpenedNotification()
+        {
+            //Arrange 
+            using (var newLib = new Library(_path, _fileValidator))
+                newLib.Create();
+
+            //Act
+            _selector.OpenLibrary(_path);
+
+            //Assert
+            Assert.That(_libraryOpenedName, Is.EqualTo(_path));
         }
     }
 }

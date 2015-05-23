@@ -1,87 +1,52 @@
 using System;
 using System.IO;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
-using Gat.Controls;
+using Ookii.Dialogs.Wpf;
 using Imb.UI;
-using Shell32;
 
 namespace Imb.ViewModels
 {
     public class LibraryLocationDialog : ILibraryLocationDialog
     {
-        public string GetNewLibraryLocation(string libraryPath)
+        public string GetNewLibraryLocation(string libraryPath, Window window = null)
         {
-            var folderDialog = new FolderBrowserDialog();
-            folderDialog.RootFolder = Environment.SpecialFolder.MyComputer;
-            folderDialog.ShowDialog();
+            var dialog = new VistaFolderBrowserDialog();
+            dialog.Description = "Please select a folder to contain the new library.";
+            dialog.UseDescriptionForTitle = true; // This applies to the Vista style dialog only, not the old dialog.
 
-            // Initializing Open Dialog
-            var openDialog = new OpenDialogView();
-            var vm = (OpenDialogViewModel)openDialog.DataContext;
-            vm.IsDirectoryChooser = true;
-            vm.SelectedFilePath = libraryPath;
+            dialog.ShowNewFolderButton = true;
+            dialog.SelectedPath = libraryPath;
 
-            // Setting window properties
-            vm.Owner = MainWindow.Instance;
-            vm.StartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
-
-            // Show locationDialog and take result into account
-            bool? result = vm.Show();
-            if (result == true)
-            {
-                // Get selected file path
-                if (vm.SelectedFolder != null)
-                    return Path.Combine(vm.SelectedFolder.Path, vm.SelectedFilePath ?? string.Empty);
-                return vm.SelectedFilePath;
-            }
+            if ((dialog.ShowDialog(window) ?? false) && dialog.SelectedPath != null)
+                    return dialog.SelectedPath;
+            
             return null;
         }
 
-        public string GetExistingLibraryLocation(string libraryPath)
+        public string GetExistingLibraryLocation(string libraryPath, Window window = null)
         {
-            // Initializing Open Dialog
-            var openDialog = new OpenDialogView();
-            var vm = (OpenDialogViewModel)openDialog.DataContext;
-            vm.IsDirectoryChooser = true;
-            vm.SelectedFilePath = libraryPath;
+            var dialog = new VistaFolderBrowserDialog();
+            dialog.Description = "Please select the folder containing the library.";
+            dialog.UseDescriptionForTitle = true; // This applies to the Vista style dialog only, not the old dialog.
 
-            // Setting window properties
-            vm.Owner = MainWindow.Instance;
-            vm.StartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            dialog.ShowNewFolderButton = false;
+            dialog.SelectedPath = libraryPath;
 
-            // Show locationDialog and take result into account
-            bool? result = vm.Show();
-            if (result == true)
-            {
-                // Get selected file path
-                if (vm.SelectedFolder != null)
-                    return Path.Combine(vm.SelectedFolder.Path, vm.SelectedFilePath ?? string.Empty);
-                return vm.SelectedFilePath;
-            }
+            if ((dialog.ShowDialog(window) ?? false) && dialog.SelectedPath != null)
+                return dialog.SelectedPath;
+
             return null;
         }
 
-        public string GetFileLocation()
+        public string GetFileLocation(Window window = null)
         {
-            // Initializing Open Dialog
-            var openDialog = new OpenDialogView();
-            var vm = (OpenDialogViewModel)openDialog.DataContext;
+            var dialog = new VistaOpenFileDialog();
+            dialog.CheckFileExists = true;
+            
+            if ((dialog.ShowDialog(window) ?? false) && dialog.FileName != null)
+                return dialog.FileName;
 
-            // Setting window properties
-            vm.Owner = MainWindow.Instance;
-            vm.StartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
-
-            // Show locationDialog and take result into account
-            bool? result = vm.Show();
-            if (result == true)
-            {
-                // Get selected file path
-                //var path = Path.Combine(vm.SelectedFolder);
-                if (vm.SelectedFolder != null)
-                    return Path.Combine(vm.SelectedFolder.Path, vm.SelectedFilePath ?? string.Empty);
-                return vm.SelectedFilePath;
-            }
             return null;
         }
     }

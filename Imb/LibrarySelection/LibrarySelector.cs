@@ -4,6 +4,7 @@ using Imb.Data;
 using Imb.Data.View;
 using Imb.ErrorHandling;
 using Imb.EventAggregation;
+using Imb.Events;
 using Imb.Utils;
 
 namespace Imb.LibrarySelection
@@ -31,7 +32,7 @@ namespace Imb.LibrarySelection
             {
                 var lib = new Library(path, _fileValidator);
                 lib.Create();
-                SetCurrent(lib);
+                SetCurrent(lib, path);
                 return MakeViewForCurrent(lib);
                 
             }
@@ -43,7 +44,7 @@ namespace Imb.LibrarySelection
             {
                 var lib = new Library(path, _fileValidator);
                 lib.Open();
-                SetCurrent(lib);
+                SetCurrent(lib, path);
                 return MakeViewForCurrent(lib);
             }
         }
@@ -60,11 +61,12 @@ namespace Imb.LibrarySelection
             }
         }
 
-        private void SetCurrent(Library lib)
+        private void SetCurrent(Library lib, string path)
         {
             if (_current != null)
                 _current.Dispose();
             _current = lib;
+            _eventAggregator.SendMessage(new LibraryOpened(path));
         }
 
         private ILibraryView MakeViewForCurrent(Library lib)

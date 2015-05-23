@@ -1,23 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Imb.Annotations;
-using Imb.Caching;
 using Imb.Data.View;
 using Imb.ErrorHandling;
 using Imb.EventAggregation;
 using Imb.Events;
 using Imb.LibrarySelection;
-using Imb.UI;
 using Imb.Utils;
 using Utils.UISupport;
 
 namespace Imb.ViewModels
 {
-    public sealed class MainVm : INotifyPropertyChanged
+    public sealed class MainVm : INotifyPropertyChanged, IListener<LibraryOpened>
     {
         private readonly ILibraryLocationDialog _locationDialog;
         private readonly ILibrarySelector _librarySelector;
@@ -38,8 +34,18 @@ namespace Imb.ViewModels
         private readonly ImbSettings _appSettings;
         private readonly IEventAggregator _eventAggregator;
         private DisplayVm _displayView;
+        private string _title;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string Title
+        {
+            get { return _title; }
+            set { 
+                _title = value; 
+                OnPropertyChanged();
+            }
+        }
 
         public IErrorHandlerView ErrorHandlerView { get { return _errorHandlerView; } }
 
@@ -71,6 +77,9 @@ namespace Imb.ViewModels
 
             DropHandler.Current.SetErrorHandler(_errorHandler);
             DropHandler.Current.SetFileValidator(_fileValidator);
+
+            Title = "Imb - no library open";
+            _eventAggregator.AddListener(this);
         }
 
         private void NewFolder(object obj)
@@ -94,7 +103,7 @@ namespace Imb.ViewModels
                 var message = newFileLocation == null 
                     ? "Unable to determine file path."
                     : string.Format("Unable to load file {0}", newFileLocation);
-                _errorHandler.LogError("Add file failed", message);
+                _errorHandler.LogError("Add file failed", message, e);
             }
         }
 
@@ -106,10 +115,11 @@ namespace Imb.ViewModels
                 libraryLocation = _locationDialog.GetNewLibraryLocation(_appSettings.LibraryPath);
                 if (libraryLocation != null)
                 {
-                    Library = _librarySelector.CreateLibrary(libraryLocation);
-                    CreateNewDisplayView();
+                    var lib = _librarySelector.CreateLibrary(libraryLocation);
+                    CreateNewDisplayView(lib);
                     AllowLibraryCommands();
                     _appSettings.LibraryPath = libraryLocation;
+                    Library = lib;
                 }
             }
             catch (Exception e)
@@ -117,14 +127,14 @@ namespace Imb.ViewModels
                 var message = libraryLocation == null
                     ? "Unable to determine file path."
                     : string.Format("Unable to create library {0}", libraryLocation);
-                _errorHandler.LogError("Add file failed", message);
+                _errorHandler.LogError("New library failed", message, e);
             }
         }
 
-        private void CreateNewDisplayView()
+        private void CreateNewDisplayView(ILibraryView lib)
         {
-            DisplayView = new DisplayVm(Library.LoadedBinariesCache);
-            Library.AttachDisplay(DisplayView);
+            DisplayView = new DisplayVm(lib.LoadedBinariesCache);
+            lib.AttachDisplay(DisplayView);
         }
 
         private void OpenLibrary(object obj)
@@ -135,10 +145,11 @@ namespace Imb.ViewModels
                 libraryLocation = _locationDialog.GetExistingLibraryLocation(_appSettings.LibraryPath);
                 if (libraryLocation != null)
                 {
-                    Library = _librarySelector.OpenLibrary(libraryLocation);
-                    CreateNewDisplayView();
+                    var lib = _librarySelector.OpenLibrary(libraryLocation);
+                    CreateNewDisplayView(lib);
                     AllowLibraryCommands();
                     _appSettings.LibraryPath = libraryLocation;
+                    Library = lib;
                 }
             }
             catch (Exception e)
@@ -146,7 +157,7 @@ namespace Imb.ViewModels
                 var message = libraryLocation == null
                     ? "Unable to determine file path."
                     : string.Format("Unable to open library {0}", libraryLocation);
-                _errorHandler.LogError("Add file failed", message);
+                _errorHandler.LogError("Open library failed", message, e);
             }
         }
 
@@ -180,6 +191,11 @@ namespace Imb.ViewModels
 
         public void AppClosing()
         {
+        }
+
+        public void Handle(LibraryOpened message)
+        {
+            Title = string.Format("Imb - {0}", message.Name);
         }
     }
 }
