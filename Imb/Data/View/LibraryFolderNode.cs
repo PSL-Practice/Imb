@@ -31,7 +31,7 @@ namespace Imb.Data.View
             if (_initialEditMode)
             {
                 if (!saveEdit)
-                   EventAggregator.SendMessage(new RemoveRequest(Id));
+                    EventAggregator.SendMessage(new RemoveDocumentById(Id));
                 _initialEditMode = false;
             }
         }

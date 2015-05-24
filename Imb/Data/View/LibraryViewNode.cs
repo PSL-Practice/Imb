@@ -139,7 +139,7 @@ namespace Imb.Data.View
         private void PerformRemoveNode(object obj)
         {
             EndEditLabel(false);
-            EventAggregator.SendMessage(new RemoveRequest(Id));
+            EventAggregator.SendMessage(new RemoveDocumentById(Id));
         }
 
         private void PerformNewFolder(object obj)

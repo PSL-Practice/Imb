@@ -6,7 +6,7 @@ using Imb.Events;
 
 namespace TestImb.Mocks
 {
-    public class EventListener : IListener<RenameRequest>, IListener<RemoveRequest>, IListener<AddNewFolder>, IListener<NodeSelfSelect>, IListener<MoveRequest>
+    public class EventListener : IListener<RenameRequest>, IListener<RemoveRequest>, IListener<AddNewFolder>, IListener<NodeSelfSelect>, IListener<MoveRequest>, IListener<RemoveDocumentById>
     {
         private StringBuilder sb = new StringBuilder();
 
@@ -22,7 +22,7 @@ namespace TestImb.Mocks
 
         public void Handle(RemoveRequest message)
         {
-            sb.AppendLine(String.Format("Remove {0}", TestIds.Id(message.Id)));
+            sb.AppendLine("Remove selected");
         }
 
         public void Handle(AddNewFolder message)
@@ -38,6 +38,11 @@ namespace TestImb.Mocks
         public void Handle(MoveRequest message)
         {
             sb.AppendLine(String.Format("Move {0} to {1}", message.Node, message.NewParent));
+        }
+
+        public void Handle(RemoveDocumentById message)
+        {
+            sb.AppendLine(String.Format("Remove {0}", TestIds.Id(message.Id)));
         }
     }
 }

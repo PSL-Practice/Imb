@@ -131,6 +131,7 @@
     <Compile Include="Events\AddNewFolder.cs" />
     <Compile Include="Events\LibraryOpened.cs" />
     <Compile Include="Events\MoveRequest.cs" />
+    <Compile Include="Events\RemoveDocumentById.cs" />
     <Compile Include="Events\RemoveRequest.cs" />
     <Compile Include="Events\RenameRequest.cs" />
     <Compile Include="Events\NodeSelfSelect.cs" />

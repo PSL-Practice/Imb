@@ -21,7 +21,7 @@ using Utils.ObservableCollectionViewers;
 namespace Imb.Data.View
 {
     public class LibraryView : INotifyPropertyChanged, IObservableCollectionAccessMediator, 
-        IDisposable, ILibraryView, IListener<NodeSelfSelect>
+        IDisposable, ILibraryView, IListener<NodeSelfSelect>, IListener<RemoveRequest>
     {
         private readonly object _lock = new object();
         private readonly ITagCache _tags;
@@ -298,6 +298,12 @@ namespace Imb.Data.View
         public void Handle(NodeSelfSelect message)
         {
             SelectedItem = message.Node;
+        }
+
+        public void Handle(RemoveRequest message)
+        {
+            if (SelectedItem != null)
+                _eventAggregator.SendMessage(new RemoveDocumentById(SelectedItem.Id));
         }
     }
 }

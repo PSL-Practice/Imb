@@ -14,7 +14,7 @@ using Imb.Utils;
 
 namespace Imb.Data.View
 {
-    public class LibraryContentOperations : IListener<RenameRequest>, IListener<RemoveRequest>, IListener<AddNewFolder>, IListener<MoveRequest>
+    public class LibraryContentOperations : IListener<RenameRequest>, IListener<RemoveDocumentById>, IListener<AddNewFolder>, IListener<MoveRequest>
     {
         private static readonly string[] NewFilePath = { "*New" };
 
@@ -179,7 +179,7 @@ namespace Imb.Data.View
             Rename(message.Id, message.NewName);
         }
 
-        public void Handle(RemoveRequest message)
+        public void Handle(RemoveDocumentById message)
         {
             Delete(message.Id);
         }

@@ -141,7 +141,7 @@ namespace TestImb.Data.View
             _dispatcher.RunDispatcher();
 
             var item = _libOps.Get("test");
-            _eventAggregator.SendMessage(new RemoveRequest(item.Id));
+            _eventAggregator.SendMessage(new RemoveDocumentById(item.Id));
             _libOps.WaitForItemChange(Guid.Empty, i => _libOps.Get("test") != null);
 
             var result = PrintAll();

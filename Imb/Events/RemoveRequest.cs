@@ -1,14 +1,9 @@
-using System;
-
 namespace Imb.Events
 {
+    /// <summary>
+    /// A request to delete the selected image
+    /// </summary>
     public sealed class RemoveRequest
     {
-        public Guid Id { get; private set; }
-
-        public RemoveRequest(Guid id)
-        {
-            Id = id;
-        }
     }
 }

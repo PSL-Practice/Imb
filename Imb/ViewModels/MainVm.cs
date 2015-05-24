@@ -20,11 +20,13 @@ namespace Imb.ViewModels
         public ICommand NewCommand { get { return _newCommand; } }
         public ICommand OpenCommand { get { return _openCommand; } }
         public ICommand AddCommand { get { return _addCommand; } }
+        public ICommand RemoveCommand { get { return _removeCommand; } }
         public ICommand NewFolderCommand { get { return _newFolderCommand; } }
 
         private readonly BlockableCommand<object> _newCommand;
         private readonly BlockableCommand<object> _openCommand;
         private readonly BlockableCommand<object> _addCommand;
+        private readonly BlockableCommand<object> _removeCommand;
         private readonly BlockableCommand<object> _newFolderCommand;
 
         private ILibraryView _library;
@@ -73,6 +75,7 @@ namespace Imb.ViewModels
             _newCommand = new BlockableCommand<object>(false, NewLibrary);
             _openCommand = new BlockableCommand<object>(false, OpenLibrary);
             _addCommand = new BlockableCommand<object>(true, AddFile);
+            _removeCommand = new BlockableCommand<object>(true, RemoveFile);
             _newFolderCommand = new BlockableCommand<object>(true, NewFolder);
 
             DropHandler.Current.SetErrorHandler(_errorHandler);
@@ -97,6 +100,22 @@ namespace Imb.ViewModels
                 {
                     _library.Operations.AddFile(newFileLocation);
                 }
+            }
+            catch (Exception e)
+            {
+                var message = newFileLocation == null 
+                    ? "Unable to determine file path."
+                    : string.Format("Unable to load file {0}", newFileLocation);
+                _errorHandler.LogError("Add file failed", message, e);
+            }
+        }
+
+        private void RemoveFile(object obj)
+        {
+            string newFileLocation = null;
+            try
+            {
+                _eventAggregator.SendMessage(new RemoveRequest());
             }
             catch (Exception e)
             {
@@ -164,6 +183,7 @@ namespace Imb.ViewModels
         private void AllowLibraryCommands()
         {
             _addCommand.Blocked = false;
+            _removeCommand.Blocked = false;
             _newFolderCommand.Blocked = false;
         }
 
