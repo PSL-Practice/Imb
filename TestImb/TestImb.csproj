@@ -89,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\TestDropHandler.cs" />
     <Compile Include="Utils\TestFileValidator.cs" />
+    <Compile Include="Utils\TestGoogleImagesLinkDecoder.cs" />
     <Compile Include="Utils\TestPathAdjuster.cs" />
     <Compile Include="ViewModels\TestMainVm.cs" />
   </ItemGroup>

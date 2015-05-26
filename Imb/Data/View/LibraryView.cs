@@ -73,7 +73,7 @@ namespace Imb.Data.View
         public LibraryViewNode SelectedItem
         {
             get { return _selectedItem; }
-            private set
+            set
             {
                 if (Equals(value, _selectedItem)) return;
 

@@ -79,6 +79,7 @@ namespace Imb.Utils
         {
             _dataHandlers = new List<IDataHandler>
             {
+                new GoogleImagesDropHandler(),
                 new URLDropDataHandler(),
                 new FileDropDataHandler(),
             };

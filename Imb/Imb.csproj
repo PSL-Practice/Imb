@@ -161,6 +161,7 @@
     <Compile Include="Utils\DropArgs.cs" />
     <Compile Include="Utils\DropHandler.cs" />
     <Compile Include="Utils\FileValidator.cs" />
+    <Compile Include="Utils\GoogleImageLinkDecoder.cs" />
     <Compile Include="Utils\PathAdjuster.cs" />
     <Compile Include="ViewModels\DisplayVm.cs" />
     <Compile Include="ViewModels\ErrorHandlerView.cs" />

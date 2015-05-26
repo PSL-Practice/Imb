@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Threading;
 using Imb.Annotations;
 using Imb.Utils;
 
@@ -183,6 +182,7 @@ namespace Imb.Data
                 var nameTag = _tagCache.AddOrGet(name);
                 var originalPathTag = _tagCache.AddOrGet(fileContainerPath);
                 var pathId = _pathsCache.AddOrGet(path);
+
                 var binary = new BinaryStorageClass
                 {
                     Id = Guid.NewGuid(),
